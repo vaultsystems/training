@@ -1,0 +1,24 @@
+---
+heat_template_version: 2015-04-30
+
+parameters:
+  image:
+    type: string
+    label: Ubuntu 17.4
+    default: Ubuntu 17.4
+  network:
+    type: string
+    label: Network Name
+    default: jns_staging_net
+    
+resources:
+  myfirst_stack:
+    type: OS::Nova::Server
+    properties:
+      name: first_stack_instance
+      flavor: 8C16R64D
+      networks:
+        - network: { get_param: network }
+          fixed_ip: 172.16.0.100
+      image: { get_param: image }
+      user_data_format: RAW
